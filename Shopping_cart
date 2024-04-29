@@ -1,0 +1,152 @@
+Write a Java program to simulate an online shopping cart.
+
+A shopping cart is a collection of items selected by a customer for purchase. 
+A user can add items to the cart, remove them, empty the cart, view the items in the cart, view the items in the shop, and end shopping and proceed to checkout.(using arraylist) 
+
+
+
+
+ class Item {
+    String item_name;
+    int item_price;
+    int item_quantity;
+
+    
+    public Item(String item_name, int item_price, int item_quantity) {
+    	
+    	this.item_name = item_name;
+    	this.item_price = item_price;
+    	this.item_quantity = item_quantity;
+    }
+   
+   public void display()
+   {
+    System.out.println("item name is " +item_name );
+    System.out.println("item price is "+item_price);
+    System.out.println("item quantity is " +item_quantity);
+   }
+
+
+
+}
+
+
+
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Shopping_cart {
+	ArrayList<Item> additemtocart() {
+		ArrayList<Item> cart = new ArrayList<Item>();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter Your total items ");
+		int num = sc.nextInt();
+		for (int i = 0; i < num; i++) {
+			System.out.println("Enter the item name");
+			String item_name = sc.next();
+			System.out.println("enter the item price ");
+			int item_price = sc.nextInt();
+			System.out.println("enter the item quantity");
+			int item_quantity = sc.nextInt();
+			cart.add(new Item(item_name, item_price, item_quantity));
+		}
+		return cart;
+	}
+
+	void display(ArrayList<Item> cart) {
+		for (Item p : cart) {
+			p.display();
+		}
+	}
+
+	void remove(ArrayList<Item> cart) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter The item name You want to remove");
+		String itemRemove=sc.next();
+		for(Item ele: cart) {
+			if(ele.item_name.equals(itemRemove))
+			{
+				cart.remove(ele);
+				System.out.println("item remove successfully");
+			}
+		}	
+	}
+	void emptyCart(ArrayList<Item> cart) {
+	    cart.clear();
+	    System.out.println("Cart emptied successfully.");
+	}
+	void viewcart(ArrayList<Item> cart)
+	{
+
+		
+			if(cart.isEmpty())
+			{
+				System.out.println("there is nothing in cart ");
+			}
+			else
+			{
+				System.out.println("available in cart");
+				 for (Item item : cart) {
+		                System.out.println(item);
+		            }
+			}
+		
+	}
+	void checkout(ArrayList<Item> cart)
+	{
+		System.out.println("thankyouu for choosing ");
+	}
+
+}
+
+
+import java.util.ArrayList;
+import java.util.Scanner;
+public class Shopcart_main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		  Shopping_cart s = new Shopping_cart();
+	        ArrayList<Item> cart = new ArrayList<Item>();
+	        Scanner scanner = new Scanner(System.in);
+	        int choice;
+
+	        do {
+	            System.out.println("\nMenu:");
+	            System.out.println("1. Add item to cart");
+	            System.out.println("2. Remove item from cart");
+	            System.out.println("3. View cart");
+	            System.out.println("4. Empty cart");
+	            System.out.println("5. Checkout");
+	            System.out.println("6. Exit");
+	            System.out.print("Enter your choice: ");
+	            choice = scanner.nextInt();
+
+	            switch (choice) {
+	                case 1:
+	                    s.additemtocart();
+	                    break;
+	                case 2:
+	                    s.remove(cart);
+	                    break;
+	                case 3:
+	                    s.viewcart(cart);
+	                    break;
+	                case 4:
+	                    s.emptyCart(cart);
+	                    break;
+	                case 5:
+	                    s.checkout(cart);
+	                    break;
+	                case 6:
+	                    System.out.println("Exiting...");
+	                    break;
+	                default:
+	                    System.out.println("Invalid choice. Please enter a number between 1 and 6.");
+	            }
+	        } while (choice != 6);
+
+	    
+}
+}
