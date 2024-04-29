@@ -1,0 +1,207 @@
+1)	Program to count the number of character, no of word, no of lines in a given file.
+
+
+package file_handling;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class Assignmet1 
+{
+   public static void main(String[] args) throws IOException 
+   {
+	   FileReader fr=new FileReader("Dac");
+	   int ch,i = 0;
+	   while((ch=fr.read())!=-1)
+	   {
+		   i++;
+	   }
+	   System.out.println("number of character in file is "+i);
+	   
+	   FileReader fr1=new FileReader("Dac");
+	   BufferedReader br= new BufferedReader(fr1);
+	   int x=0;
+	   while(br.readLine()!=null)
+	   {
+		  x++;
+	   }
+	   System.out.println("number of lines in file are "+x);
+	   
+	   FileReader fr2=new FileReader("Dac");
+	   BufferedReader br1= new BufferedReader(fr2);
+	   String str;
+	   int wordcount=0;
+   
+	   while ((str= br1.readLine()) != null) {
+           String[] words = str.split("\\s+"); // Split the line into words using whitespace as the delimiter
+           wordcount += words.length;
+       }
+
+       System.out.println("Total word count: " + wordcount);   
+	   
+	   
+   }
+}
+
+
+
+2.	Java Program to Search for a given word in a File ?
+
+package file_handling;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class assignement2 
+{
+    public static void main(String[] args) throws IOException 
+    {
+		FileReader fr= new FileReader("Dac");
+		BufferedReader br=new BufferedReader(fr);
+		String str;
+		String word;
+		System.out.println("enter the word that you want to search in file");
+		Scanner s =new Scanner(System.in);
+		word=s.next();
+		while((str=br.readLine())!=null)
+		{
+			if(str.contains(word))
+			{
+				System.out.println("word "+word +" found in the file");
+			}
+//			else 
+//			{
+//				System.out.println("the word you are searching for is not available in file");
+//			}
+		}
+	}
+}
+
+
+
+
+3)	Read source and destination file from the user as an argument. Copy the contents of the source into another destination file in a faster, efficient way. ??
+
+
+package file_handling;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class Assignment3 
+{
+    public static void main(String[] args) throws IOException 
+    {
+		FileReader fr=new FileReader("Dac");
+	    BufferedReader br=new BufferedReader(fr);
+	    
+	    FileWriter fw=new FileWriter("New_Dac");
+	    String str;
+	    while((str=br.readLine())!=null)
+	    {
+	    	fw.write(str+"\n");
+	    }
+	    
+	    br.close();
+	    fw.close();
+	    
+    }
+}
+
+
+ 4)	Write a program to serialize the student object(id,name,marks,subject) *Write a student object (minimum five)  into the file 
+* Read the same from the file, 
+* Find out result and display the student details along with result.
+* Find out how many no of students passed and failed in a particular 
+   Subject.
+*Sort the students object based on marks.
+
+
+
+ package file_handling;
+
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+
+//import file_handling.Student.Sortbyint;
+
+
+public class Assignment4 
+{
+     public static void main(String[] args) throws IOException, ClassNotFoundException
+     {
+		Student s1=new Student(1,"yash",32,"math");
+		Student s2=new Student(2,"bhavesh",65,"english");
+		Student s3=new Student(3,"harshal",23,"ssc");
+		Student s4=new Student(4,"chirag",67,"dbt");
+		Student s5=new Student(5,"abhi",89,"cpp");
+		
+		FileOutputStream fo=new FileOutputStream("student");
+		ObjectOutputStream oo=new ObjectOutputStream(fo);
+		oo.writeObject(s1);
+		oo.writeObject(s2);
+		oo.writeObject(s3);
+		oo.writeObject(s4);
+		oo.writeObject(s5);
+		
+		FileInputStream fi1=new FileInputStream("student");
+		ObjectInputStream oi=new ObjectInputStream(fi1);
+		
+		ArrayList<Student> arr=new ArrayList<>();
+		try {
+            while (true) {
+                Student s = (Student) oi.readObject();
+                arr.add(s);
+            }
+        } catch (EOFException e) 
+		{
+            // End of file reached
+        }
+		
+		Sortbyin a=new Sortbyin();
+		Collections.sort(arr,a);
+		
+
+        for (Student student : arr) {
+            System.out.println("Student ID: " + student.id + ", Name: " + student.name + ", Marks: " + student.marks + ", Subject: " + student.subject);
+        }
+        
+        //int p=arr.get(0).marks;
+        //System.out.println(p);
+        int z=0,v=0;
+        for(int i=0;i<arr.size();i++)
+        {
+            int p=arr.get(i).marks;
+            
+            if(p>35)
+            	{
+            	   System.out.println( arr.get(i).name+" is pass");
+            	   z++;
+            	}
+            else
+            	{
+            	    System.out.println(arr.get(i).name+" is fail");
+            	    v++;
+            	}
+         
+        }
+        System.out.println("number of fail studnts in class is "+v);
+        System.out.println("number of pass studnts in class is "+z);
+        
+     }
+}
+     
+
+
