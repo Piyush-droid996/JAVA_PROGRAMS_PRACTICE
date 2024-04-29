@@ -1,0 +1,145 @@
+Write a Java program menu driven to perform the following operations using Map 
+
+* Create a class called Book with the following instance variable 
+
+name 
+price 
+author name 
+isbn no; 
+publication 
+
+* Create 5 Objects of book class 
+* Add all the object in to the Map using key as integer(book id) and value as Book Object 
+* Display all the map object using for each 
+* Read any key from the user and display the particular book object based on key 
+* Reduce the price by 10% for a particular publication books and display all object with reduced price. 
+
+
+
+
+package hashmap;
+
+public class Hashmapeg
+{
+     String name;
+     double price;
+     String aname;
+     int isbnno;
+     String publication;
+	 
+     public Hashmapeg(String name, double price, String aname, int isbnno, String publication)
+	{
+		this.name = name;
+		this.price = price;
+		this.aname = aname;
+		this.isbnno = isbnno;
+		this.publication = publication;
+	}
+
+
+     
+     public void display()
+     {
+    	 System.out.println(" name=" + name + ", price=" + price + ", aname=" + aname + ", isbnno=" + isbnno
+				+ ", publication=" + publication );
+     }
+     
+     
+}
+
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Scanner;
+
+//import hashmap.Hashmapeg.sortbyprice;
+
+public class Testhashmap 
+{
+   public static void main(String[] args)
+   {
+	  HashMap<Integer,Hashmapeg> hash=new HashMap<>();
+	  Hashmapeg h1=new Hashmapeg("Introduction to computer", 500.0f, "amit garg", 123456, "Readers zone");
+	  Hashmapeg h2=new Hashmapeg("publish news letter", 600.0f, "amit garg", 987456, "meit meerut");
+	  Hashmapeg h3=new Hashmapeg("mobile computing", 1100.0f, "vijay kumar singhal", 654123, "k nath & sons");
+	  Hashmapeg h4=new Hashmapeg("CBOT", 800.0f, "gunjan verma", 321654, "thakur publication");
+	  Hashmapeg h5=new Hashmapeg("computer networks", 300.0f, "saurabh singhal", 654789, "sun india publications");
+	 //insert values in hashmap 
+	  hash.put(1, h1);
+	  hash.put(2, h2);
+	  hash.put(3, h3);
+	  hash.put(4, h4);
+	  hash.put(5, h5);
+	//iterating using for each  
+	  for(Hashmapeg m:hash.values())
+	  {
+		  //System.out.println(m.getKey()+" "+m.getValue());
+		  m.display();
+	  }
+	 //printing using bookid 
+	  System.out.println("enter book id which do you want to display");
+	  Scanner s=new Scanner(System.in);
+	  int x=s.nextInt();
+	  hash.get(x).display();
+	  
+	  //updating values
+	  System.out.println("enter book id which do you want to update");
+	  int y=s.nextInt();
+	  for(int i=0;i<hash.size();i++)
+	  {
+          if(hash.get(i)==hash.get(y))
+          {
+              float p= (float) hash.get(i).price;
+              float a=(p/100)*10;
+              hash.get(i).price=p-a;
+          }  
+		  
+	  }  
+	  for(Hashmapeg m:hash.values())
+	  {
+		  //System.out.println(m.getKey()+" "+m.getValue());
+		  m.display();
+	  }
+	  System.out.println("after sort");
+	  
+	  
+	  ArrayList<Hashmapeg> book=new ArrayList<>(hash.values());
+	  sortbyprice so=new sortbyprice();
+	  Collections.sort(book,so);
+	  for(Hashmapeg h:book)
+	  {
+		  //System.out.println(h);
+		  h.display();
+	  }
+   }
+   
+}
+
+
+
+import java.util.Comparator;
+
+class sortbyprice implements Comparator<Hashmapeg>
+{
+
+	@Override
+	public int compare(Hashmapeg o1, Hashmapeg o2) 
+	{
+          if(o1.price>o2.price)
+        	  return 1;
+          else
+        	  return -1;
+		
+	}
+
+}
+
+
+
+
+	
+
+      
+
