@@ -1,0 +1,226 @@
+1.	Create a class called Emp with data members empno, empname, designation, dept and salary and methods as readEmpData() 
+(to read  values to data members) and displayEmpData() (to display data members values to the screen) create an employee instance and display its information
+
+
+package piyushapplication;
+import java.util.Scanner;
+
+public class Program1_Employee {
+    int emp_no;
+   String emp_name;
+   double salary;
+   String Dept;
+   String Desg;
+   Program1_Employee(int emp_no, String emp_name,double salary, String Dept, String Desg)
+   {
+	   this.emp_no=emp_no;
+	   this.emp_name=emp_name;
+	   this.salary=salary;
+	   this.Dept=Dept;
+	   this.Desg=Desg;
+   }
+//   public void Readmpdata() {
+//		Scanner sc = new Scanner(System.in);
+//		System.out.println("Enter your emp no");
+//		emp_no=sc.nextInt();
+//		System.out.println("Enter your emp_name");
+//		emp_name=sc.next();
+//		System.out.println("Enter your salary");
+//		salary=sc.nextFloat();
+//		System.out.println("Enter your Dept");
+//		Dept=sc.next();
+//		System.out.println("Enter your DESIGNATION");
+//		Desg=sc.next();
+//		
+//   }
+   public void displayempdata() {
+	   System.out.println("employe no is " + emp_no);
+	   System.out.println("employe name is " + emp_name);
+	   System.out.println("employe salary is " +salary);
+	   System.out.println("employe dept is "  +Dept);
+	   System.out.println("emplye designation " +Desg);
+}
+
+	public static void main(String[] args) {
+		Program1_Employee emp1 = new Program1_Employee(12,"piyush",200000.00, "Cdac_Pg_dac", "Web developer");
+		Program1_Employee emp2 = new  Program1_Employee(13,"anii",10000.00,"DBDA","BACKEND DEVELOPPER");
+		
+//		emp.Readmpdata();
+		emp1.displayempdata();
+		emp2.displayempdata();
+		
+
+	}
+
+}
+
+2.Create a class Electricity bill with data members as customer number, customer name, units consumed and methods as follows:
+
+1. 	readData() - to read the values of data members.
+2.	showData - to display the customer details
+3.	computeBill() - to calculate and return electricity charges to be paid.calculate 			the bill as specified below
+
+             number of units		charges
+		< = 100			Rs.1.20
+	      for the next 200 units 	Rs. 2.00
+	   for the next 300 units	Rs. 3.00
+		for more		Rs. 5.00		
+ex:  input = 320 units output = 100*1.20 +200*2.00+20*3.00 =  Rs. 580
+ 
+Read customer object values, calculate electricity bill and display the values
+
+
+
+
+package piyushapplication;
+import java.util.Scanner;
+
+public class Program2_Electricity  {
+
+	     int cust_num;
+	     String cust_name;
+	     int consumed_unit;
+	     
+	     Program2_Electricity (int cust_num, String cust_name, int consumed_unit){
+	    	 this.cust_num=cust_num;
+	    	 this.cust_name=cust_name;
+	    	 this.consumed_unit=consumed_unit;
+	     }
+	    public double computeBill() {
+	    	double bill=0;
+	    	if(consumed_unit<=100) {
+	    		bill=consumed_unit*1.20;
+	    	}
+	    	else if(consumed_unit<=300) {
+	    		bill=100*1.20+(consumed_unit-100)*2.00;
+	    	}
+	    	else if(consumed_unit<=600) {
+	    		bill=100*1.20+200*2.00+(consumed_unit-300)*3.00;
+	    	}
+	    	else
+	    	{
+	    		bill=100*1.20+200*2.00+300*3.00+(consumed_unit-600)*5.00;
+	    	}
+	    	return bill;
+	    }
+	    public void showData() {
+	    	System.out.println("customer number is " +cust_num);
+	    	System.out.println("customer name is " +cust_name);
+	    	System.out.println("customer number is " +consumed_unit);
+	    }
+	   
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Program2_Electricity  b =new Program2_Electricity(20,"piyush",320);
+//		b.readdata();
+		b.showData();
+		double billAmount=b.computeBill();
+		System.out.println("electricity bill is rs. " + billAmount);
+	}
+}
+
+
+3.Write a Java program that creates a  account classs with instance variable accno,accname,amount and instance method  withdraw, deposit, and  interest. Create object of account class test all methods.
+
+
+package piyushapplication;
+
+public class  program4_Account
+ {
+	int accNo;
+	String acc_Name;
+	double amount;
+	public void Account(int accNo , String acc_Name , double amount) {
+		this.accNo=accNo;
+		this.acc_Name= acc_Name;
+		this.amount=amount;
+	}
+	
+	public void withdraw(double withdrawalAmount) {
+        if (withdrawalAmount > amount) {
+            System.out.println("Insufficient funds.");
+        } else {
+            amount =  amount-withdrawalAmount;
+            System.out.println("Withdrawal successful. Current balance: " + amount);
+        }
+    }
+	
+	public void deposit(double depositAmount) {
+        amount = amount+depositAmount;
+        System.out.println("Deposit successful. Current balance: " + amount);
+    }
+	 public void calculateInterest(double rate) {
+	        double interest = amount * rate / 100;
+	        amount += interest;
+	        System.out.println("Interest added. Current balance: " + amount);
+	    }
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		program4_Account myAccount = new program4_Account();
+  myAccount.deposit(500.0);
+  myAccount.withdraw(200.0);
+  myAccount.calculateInterest(5.0); // Assuming 5% interest rate
+	}
+
+}
+
+4. Write a Java program to create a class called player with name, age, country Name, total run as instance member.    
+Create 5 player objects and write  instance method to display the details of Player having more than 5000 as total run?
+
+package piyushapplication;
+class Athlete{
+	String name;
+	int age;
+	String Country_name;
+	int total_run;
+	
+	Athlete(String name,int age, String Country_name,int total_run)
+	{
+		this.name=name;
+		this.age=age;
+		this.Country_name=Country_name;
+		this.total_run=total_run;
+	}
+	public void display()
+	{
+		if(total_run>5000) 
+		 {
+			System.out.println("Playeer name is :" +name);
+			System.out.println("player age is :" +age);
+			System.out.println("player Country_name is :" +Country_name);
+			System.out.println("player total run is:"+total_run);
+			
+		 }	
+	}
+}
+
+
+
+
+public class program5_player {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		Athlete playr1 = new Athlete("shinchan",10,"ny",21000);
+		playr1.display();
+		Athlete playr2 = new Athlete("Jeery",20,"ROME",2000);
+		playr2.display();
+		Athlete playr3 = new Athlete("Tom",12,"aus",499000);
+		playr3.display();
+		Athlete playr4 = new Athlete("Pokemon",11,"Sydney",199000);
+		playr4.display();
+		Athlete playr5 = new Athlete("Ben_!0",10,"bangalore",1000);
+		playr5.display();
+
+	}
+}
+
+
+
+
+
+
+
+
